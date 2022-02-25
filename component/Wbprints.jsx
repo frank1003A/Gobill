@@ -1,10 +1,12 @@
 import React from "react";
 import styles from "../styles/Invoice.module.css";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
-const Wbprint = React.forwardRef(({ qty, desc, amt, tot, ID }, ref) => {
+const Wbprints = React.forwardRef(({ tot }, ref) => {
+  const selectedItems = useSelector((state) => state.itemsSelected);
   return (
-    <div className={styles["invoice-box"]} id={ID} ref={ref}>
+    <div className={styles["invoice-box"]} ref={ref}>
       <table cellPadding="0" cellSpacing="0">
         <tr className={styles.top} id="trinfo">
           <td colSpan="3">
@@ -74,13 +76,19 @@ const Wbprint = React.forwardRef(({ qty, desc, amt, tot, ID }, ref) => {
           <td style={{ textAlign: "left" }}>Price</td>
         </tr>
 
-        <tr className={styles.item}>
-          <td style={{ textAlign: "left" }}>{qty}</td>
+        {selectedItems.itemsSelected.map((item) => {
+          return (
+            <>
+              <tr className={styles.item}>
+                <td style={{ textAlign: "left" }}>{item.quantity}</td>
 
-          <td style={{ textAlign: "left" }}>{desc}</td>
+                <td style={{ textAlign: "left" }}>{item.description}</td>
 
-          <td style={{ textAlign: "left" }}>&#8358; {amt}</td>
-        </tr>
+                <td style={{ textAlign: "left" }}>&#8358; {item.amount}</td>
+              </tr>
+            </>
+          );
+        })}
 
         <tr className={styles.total}>
           <td></td>
@@ -94,4 +102,4 @@ const Wbprint = React.forwardRef(({ qty, desc, amt, tot, ID }, ref) => {
   );
 });
 
-export default Wbprint;
+export default Wbprints;

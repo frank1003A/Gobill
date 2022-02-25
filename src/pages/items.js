@@ -3,6 +3,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import Waybill from "../../component/Waybill";
 import useLocalStorage from "../../hooks/localStorage";
+import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 import { TextField, Button, FormLabel } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
@@ -103,6 +104,8 @@ const Items = () => {
 
   // Snackbar Alert end
 
+  console.log(selectedItems)
+
   //calculate waybill total
   const getSum = () => {
     const Sum = selectedItems.itemsSelected.reduce(
@@ -145,7 +148,6 @@ const Items = () => {
     return [tens, hundreds, thousands].join(',')
   }
 
-  /*
   const fetchWaybills = async () => {
     const res = await fetch("/api/waybill", {
       method: 'GET',
@@ -179,8 +181,8 @@ const Items = () => {
 
     const data = await res.json()
     console.log(data)
+
   };
-  */
 
   //date format
   const convert = (str) => {
@@ -344,6 +346,18 @@ const Items = () => {
             >
               Create waybill
             </Button>
+
+            <Link href={"/waybills-view"} >
+            <Button
+              variant="contained"
+              sx={{
+                gap: 1,
+                color: "#fffff",
+                background: "#002244",
+                width: "fit-content",
+              }}
+            >PDF</Button>
+            </Link>
           </div>
         </div>
       </Modal>

@@ -44,7 +44,7 @@ const waybill = ({ waybills }) => {
       date : convert(Date.now())
     }
 
-    const res = await fetch(`/api/waybill?wid=${id}`,{
+    const res = await fetch(`/api/waybill?waybill_id=${id}`,{
       method: 'PATCH',
       headers: { 
         "Content-Type": "application/json"

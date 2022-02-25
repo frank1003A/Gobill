@@ -11,9 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faFilePdf } from "@fortawesome/free-regular-svg-icons";
 import { useState } from "react";
-import Waybill_Index from "./WaybillPrint/Waybill_Index";
 import Modal from "../component/Modal";
-import { PDFViewer } from "@react-pdf/renderer";
 import Link from "next/link";
 import { Checkbox } from "@mui/material";
 
