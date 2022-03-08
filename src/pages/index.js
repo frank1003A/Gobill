@@ -9,7 +9,8 @@ import { Container, Input } from '@mui/material'
 import * as XLSX from 'xlsx'
 import useLocalStorage from '../../hooks/localStorage'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFile, faReceipt } from '@fortawesome/free-solid-svg-icons'
+import { faFile, faReceipt, faFileInvoice } from '@fortawesome/free-solid-svg-icons'
+
 
 
 export default function Home() {
@@ -52,25 +53,15 @@ export default function Home() {
       });
   
       promise.then((d) => {
-        const itemIvt = d.map((item) =>{
-          let inventory = {
-            WhatsApp : item.__EMPTY,
-            CName : item.__EMPTY_1,
-            Agent : item.__EMPTY_2,
-            Amount : item.__EMPTY_9,
-            Kilo : item.__EMPTY_5
-          };
-          return inventory
-        })
-          return (setitemInventory(itemIvt))
+        return (setitemInventory(d))
       });
 }
 
   return (
     <Layout>
       <div className={styles.main}>
-      <Paper elevation={24} sx={{borderRadius: '8px'}}>
-        <p>Inventory Details ?</p>
+      <Paper elevation={24} widthComp={'400px'} sx={{borderRadius: '8px'}}>
+        <p>Inventory Details</p>
           <div className={styles.card} onClick={() => handleOpenModal()}>
           <h2>Spreadsheet <FontAwesomeIcon icon={faFile} /></h2>
             <p>Create an inventory with existing spreadsheet!</p>
@@ -81,13 +72,39 @@ export default function Home() {
           </div>
       </Paper>
 
-      <div className={styles.maincontainer}>
-      <Image src="/svg/4.svg" width={600} height={600} alt="illustration"/>
+      <Paper elevation={24} widthComp={'400px'} sx={{borderRadius: '8px',}}>
+      <p>Dashboard Informations</p>
+       <div className={styles.card} onClick={() => handleOpenModal2()}>
+          <h2>Gobill <FontAwesomeIcon icon={faFile} /></h2>
+            <p>Create invoices, Quoations and Receipt with our default template!</p>
+          </div>
+          <div className={styles.card} onClick={() => handleOpenModal2()}>
+          <h2>Gobill Extension <FontAwesomeIcon icon={faFile} /></h2>
+            <p>Create invoices and waybills from email body!</p>
+          </div>
+      </Paper>
+
+      <Paper elevation={24} widthComp={'400px'} sx={{borderRadius: '8px',}}>
+      <p>Created Inventories</p>
+      <div className={styles.invcards}>
+      <div className={styles.card}>
+        <p> <FontAwesomeIcon icon={faFileInvoice}/>{'    '}(20/12/21)_Inventory</p>
       </div>
+      <div className={styles.card}>
+        <p>(20/12/21) Inventory</p>
+      </div>
+      <div className={styles.card}>
+        <p>(20/12/21) Inventory</p>
+      </div>
+      </div>
+      </Paper>
+
+      
     </div>
     <Modal OpenModal={OpenModal} handleCloseModal={handleCloseModal}>
+    <div className={styles.flexcol}>
     <Paper elevation={0}>
-      <p>Upload Spreadsheet &rarr;</p>
+      <p>Upload excel, csv or json &rarr;</p>
     <Input
                 variant="outlined"
                 accept="file"
@@ -106,6 +123,7 @@ export default function Home() {
                 onClick={() => readExcelFile(Mfile)}
                 >Create Inventory <FontAwesomeIcon icon={faReceipt}/> </Button>
       </Paper>
+    </div>
     </Modal>
     <Modal OpenModal={OpenModal2} handleCloseModal={handleCloseModal2}>
       <p>coming soon &rarr;</p>
@@ -114,3 +132,26 @@ export default function Home() {
     
   )
 }
+
+/**
+ const itemIvt = d.map((item) =>{
+          let inventory = {
+            WhatsApp : item.__EMPTY,
+            CName : item.__EMPTY_1,
+            Agent : item.__EMPTY_2,
+            Amount : item.__EMPTY_9,
+            Kilo : item.__EMPTY_5
+          };
+          return inventory
+        })
+          return (setitemInventory(itemIvt))
+
+
+          <div className={styles.maincontainer}>
+      <Image src="/svg/4.svg" width={600} height={600} alt="illustration"/>
+      <Button 
+                variant='contained' 
+                sx={{ gap: 1, color: '#fffff',background: '#002244'}}
+                >Create Inventory <FontAwesomeIcon icon={faReceipt}/> </Button>
+      </div>
+ */

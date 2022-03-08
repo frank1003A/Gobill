@@ -1,5 +1,5 @@
 import clientPromise from "../../../lib/mongodb";
-import { ObjectId } from "mongodb";
+
 
 export default async function waybill(req, res) {
   if (req.method === "GET") {
@@ -30,25 +30,6 @@ export default async function waybill(req, res) {
       res.status(201).json(newWaybill);
     } catch (err) {
       res.status(400).json({ error: err.message });
-    }
-
-    if (req.method === "PATCH") {
-      try {
-        const id = req.query;
-        console.log(id);
-        const body = req.body;
-        console.log(body);
-        const client = await clientPromise;
-        const db = client.db("Gobill");
-        let waybill = await db.collection("Waybill");
-        const updatedWaybill = await waybill.updateOne(new ObjectId(id.wid), {
-          $set: body,
-        });
-        console.log(updatedWaybill);
-        res.status(200).json(updatedWaybill);
-      } catch (err) {
-        res.status(400).json({ message: err.message });
-      }
     }
   }
 }

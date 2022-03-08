@@ -9,9 +9,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight, faInbox, faMailReply, faTabletButton } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faInbox, faMailReply} from '@fortawesome/free-solid-svg-icons';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
 import Link from 'next/link'
+import Image from 'next/image'
 
 
 export default function TemporaryDrawer() {
@@ -75,8 +76,10 @@ export default function TemporaryDrawer() {
             anchor={anchor}
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
+            sx={{marginTop: 65}}
           >
             {list(anchor)}
+            <Image src={'/protek_c1_logo_2.png'} width={80} height={80}/>
           </Drawer>
         </React.Fragment>
       ))}

@@ -18,11 +18,14 @@ const itemsSlice = createSlice({
         removeItemSelected: (state, action) => {
             const itemm = action.payload
             state.itemsSelected = state.itemsSelected.filter((itm) => itm.amount !== itemm)
+        }, 
+        clearItemsSelected: (state) => {
+            state.itemsSelected = []
         }
     }
 })
 
-export const { updateItemsSelected, removeItemSelected } = itemsSlice.actions
+export const { updateItemsSelected, removeItemSelected, clearItemsSelected } = itemsSlice.actions
 
 
 export default itemsSlice.reducer

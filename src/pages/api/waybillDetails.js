@@ -8,6 +8,7 @@ export default async function handler(req, res) {
         const client = await clientPromise;
         const db = client.db("Gobill");
         let waybill = await db.collection("Waybill").findOne({_id: new ObjectId(query.waybill_id)})
+        console.log(waybill)
        res.status(200).json(waybill) 
     } catch (err) {
         res.status(400).json({error: err.message})

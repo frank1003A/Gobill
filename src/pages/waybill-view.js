@@ -4,6 +4,9 @@ import { useSelector } from 'react-redux';
 import { Button } from "@mui/material";
 import { useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
+import styles from '../../styles/glb.module.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPrint } from "@fortawesome/free-solid-svg-icons";
 
 
 const waybillview = () => {
@@ -15,7 +18,7 @@ const waybillview = () => {
   });
 
   return (
-    <Layout>
+    <Layout mTop={'100px'} mLeft={'100px'}>
         <Wbprint
         ID={'Htmltoprint'}
         qty={selectedItem.itemSelected.quantity}
@@ -24,7 +27,9 @@ const waybillview = () => {
         tot={selectedItem.itemSelected.amount}
         ref={componentRef}
         />
-      <Button sx={{background: "#002244"}} onClick={handlePrint}>Print this out!</Button>
+      <div className={styles.btncontainer}>
+          <Button sx={{background: "#002244", color: "#fff"}} onClick={handlePrint}>Print <FontAwesomeIcon icon={faPrint} /></Button>
+        </div>
     </Layout>
   )
 }
